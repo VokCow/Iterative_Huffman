@@ -9,12 +9,11 @@ def lowest_pair(source):
 
 def Huffman(source):
 
-# all the encoding versions will be stored in this list X
+# all the source distribution versions will be stored in this list X
   X=[source]
   t_source=copy.deepcopy(source)
 
-# iteratively merge the two less probable symbols until encoding consist in just one
-# symbol with probability 1
+# iteratively merge the two less probable symbols until the source distribution consist in only two symbols
   while(True):
     
     a1,a2=lowest_pair(t_source)
@@ -30,10 +29,10 @@ def Huffman(source):
 
   code=dict(zip(t_source.keys(),['1','0']))
 
-# reverse the list containing encodings 
+# reverse the list containing source distributions 
   X_r = X[::-1]
 
-# reconstruct the codes starting with the symbols in the last encoding version
+# reconstruct the codes starting with the symbols in the last source distribution version
   for i in range(len(X_r)-1):
 
     a_old=set(X_r[i].keys())-set(X_r[i+1].keys())
@@ -44,6 +43,7 @@ def Huffman(source):
     a_old=list(a_old)[0]
     a_new=list(a_new)
     
+    # check that reconstruction is done in proper order
     if a_old[0] == a_new[0]:
       a1,a2=a_new[0],a_new[1]
     else:
